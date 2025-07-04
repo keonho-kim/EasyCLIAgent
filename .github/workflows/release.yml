@@ -30,13 +30,13 @@ jobs:
         with:
           node-version: 20
           
-      # Python 설정 (PEP 668 호환)
+      # Python 설정 (최신 node-pty 호환)
       - name: Setup Python setuptools
         run: |
-          # PEP 668 환경에서 안전한 setuptools 설치
-          python3 -m pip install --user --break-system-packages setuptools || \
+          # 최신 방법: brew로 setuptools 설치
           brew install python-setuptools || \
-          echo "Setuptools installation attempted"
+          python3 -m pip install --user --break-system-packages setuptools || \
+          echo "Using system Python without additional setuptools"
           
       # npm 캐싱
       - name: Get npm cache directory path
