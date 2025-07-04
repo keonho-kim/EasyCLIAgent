@@ -20,6 +20,11 @@ const config = {
     'package.json',
   ],
   
+  // ASAR 압축에서 네이티브 모듈 제외
+  asarUnpack: [
+    'node_modules/node-pty/**/*'
+  ],
+  
   // 제외할 파일들
   extraResources: [
     {
@@ -29,22 +34,19 @@ const config = {
     },
   ],
   
-  // macOS 설정
+  // macOS 설정 (개발용 단순화)
   mac: {
     category: 'public.app-category.developer-tools',
-    icon: 'build/icon.icns',
-    hardenedRuntime: true,
+    hardenedRuntime: false,
     gatekeeperAssess: false,
-    entitlements: 'build/entitlements.mac.plist',
-    entitlementsInherit: 'build/entitlements.mac.plist',
     target: [
       {
         target: 'dmg',
-        arch: ['x64', 'arm64'],
+        arch: ['arm64'],
       },
       {
         target: 'zip',
-        arch: ['x64', 'arm64'],
+        arch: ['arm64'],
       },
     ],
   },
@@ -136,7 +138,7 @@ const config = {
   
   // 보안 설정
   npmRebuild: true,
-  nodeGypRebuild: false,
+  nodeGypRebuild: true,
 };
 
 export default config;

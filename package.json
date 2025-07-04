@@ -19,6 +19,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
+    "rebuild": "electron-rebuild",
     "prepare": "husky",
     "publish": "electron-builder --publish=always",
     "draft": "electron-builder --publish=never"
@@ -100,6 +101,7 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^22.10.5",
     "@types/path-browserify": "^1.0.3",

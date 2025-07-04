@@ -18,6 +18,7 @@ export const TerminalContainer: React.FC<TerminalContainerProps> = ({
   workspaceDir,
   aiTool = 'gemini',
   onFocus,
+  onTerminalData,
   onInstructionEdit,
   onOpenFolder,
 }) => {
@@ -116,6 +117,7 @@ export const TerminalContainer: React.FC<TerminalContainerProps> = ({
         theme={theme}
         fontSize={fontSize}
         onFocus={onFocus}
+        onTerminalData={onTerminalData}
         isScrolling={terminalState.state.isScrolling}
         onScrollingChange={terminalState.setScrolling}
         onTerminalReady={handleTerminalReady}

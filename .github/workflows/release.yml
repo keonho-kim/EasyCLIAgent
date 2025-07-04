@@ -29,39 +29,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      # Python은 node-gyp(node-pty의 빌드 도구)에 필요
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
           
-      # Python 설정 (최신 node-pty 호환)
-      - name: Setup Python setuptools
-        run: |
-          # 최신 방법: brew로 setuptools 설치
-          brew install python-setuptools || \
-          python3 -m pip install --user --break-system-packages setuptools || \
-          echo "Using system Python without additional setuptools"
-          
-      # npm 캐싱
-      - name: Get npm cache directory path
-        id: npm-cache-dir
-        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-        
-      - name: Cache node_modules
+      - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-v20-
+            ${{ runner.os }}-node-
             
-      - name: Install npm dependencies
-        run: npm install
+      # 'npm ci'는 package-lock.json을 사용하여 더 빠르고 일관된 설치를 보장
+      - name: Install dependencies
+        run: npm ci
         
-      # 네이티브 모듈 재빌드 (macOS 전용)
-      - name: Rebuild native dependencies for Electron
-        run: npx @electron/rebuild --force --module-dir .
+      # @electron/rebuild를 사용하여 네이티브 모듈 재빌드 (continue-on-error 제거!)
+      - name: Rebuild native dependencies
+        run: npm run rebuild
         
-      - name: TypeScript check
+      - name: Typecheck
         run: npm run typecheck
         
-      - name: Build and package Electron app
+      # npm run package 또는 사용자 빌드 스크립트 실행
+      - name: Build and package application
         run: npm run build
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
