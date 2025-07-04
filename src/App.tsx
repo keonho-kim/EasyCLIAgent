@@ -4,13 +4,10 @@ import { DirectorySelector } from './components/DirectorySelector';
 import { SimpleTerminal } from './features/terminal';
 import { ChatInput } from './features/chat-input';
 import { AIToolSelector } from './components/AIToolSelector';
-import { ConversationPanel } from './features/conversation-panel';
 import { InstructionEditorModal } from './features/instruction-editor';
 import { useAppStore } from './stores/appStore';
 import { useFocusManager } from './shared/hooks/useFocusManager';
 import { useAIToolManager } from './shared/hooks/useAIToolManager';
-import { useRightPanel } from './shared/hooks/useRightPanel';
-import { useConversationStore } from './stores/conversationStore';
 import { useTranslation } from 'react-i18next';
 import { StatusBar } from './components/StatusBar';
 import './shared/i18n/config';
@@ -25,8 +22,6 @@ function App() {
 
   const focusManager = useFocusManager('terminal');
   const aiToolManager = useAIToolManager();
-  const rightPanel = useRightPanel();
-  const conversationStore = useConversationStore(activeTab?.workspace?.path);
 
   useEffect(() => {
     // Set the first tab as active on initial load if not already set
@@ -91,16 +86,13 @@ function App() {
     if (!activeTab?.workspace) return;
     try {
       console.log('Sending command to terminal:', command);
-      conversationStore.startCapture(command, activeTab.aiTool || 'gemini');
       const result = await window.electronAPI.sendMessage(command);
       if (!result.success) {
         setError(result.error || t('errors.messageSend'));
-        conversationStore.completeCapture();
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : t('errors.messageSend');
       setError(errorMessage);
-      conversationStore.completeCapture();
     }
   };
 
@@ -141,9 +133,6 @@ function App() {
             workspaceDir={activeTab.workspace.path}
             aiTool={activeTab.aiTool || 'gemini'}
             onFocus={focusManager.setTerminalFocus}
-            onTerminalData={conversationStore.appendOutput}
-            onHistoryToggle={() => rightPanel.togglePanel('conversation')}
-            isHistoryOpen={rightPanel.isOpen && rightPanel.panelType === 'conversation'}
             onInstructionEdit={handleOpenMarkdownEditor}
           />
         </Box>
@@ -177,20 +166,6 @@ function App() {
         recommendedTool={aiToolManager.pendingDirectory ? recentFolders.find(f => f.path === aiToolManager.pendingDirectory?.path)?.aiTool : undefined}
       />
 
-      <Box sx={{ 
-        position: 'absolute', top: 0, right: 0, width: '400px', height: '100%',
-        borderLeft: rightPanel.isOpen && rightPanel.panelType === 'conversation' ? '1px solid' : 'none',
-        borderColor: 'divider', display: 'flex', flexDirection: 'column', overflow: 'hidden',
-        backgroundColor: 'background.paper', zIndex: 1000,
-        transform: rightPanel.isOpen && rightPanel.panelType === 'conversation' ? 'translateX(0)' : 'translateX(100%)',
-        visibility: rightPanel.isOpen && rightPanel.panelType === 'conversation' ? 'visible' : 'hidden',
-        transition: 'transform 0.15s ease-out',
-      }}>
-        <ConversationPanel 
-          workspacePath={activeTab?.workspace?.path}
-          onClose={() => rightPanel.closePanel()}
-        />
-      </Box>
       
       {activeTab?.workspace && (
         <InstructionEditorModal

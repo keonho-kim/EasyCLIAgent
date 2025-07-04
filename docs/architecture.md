@@ -90,17 +90,12 @@ features/chat-input/
    - 입력 히스토리
    - 키보드 이벤트 처리
 
-2. **conversation-panel**: 대화 관리
-   - 대화 기록 표시
-   - 항목 확장/축소
-   - 실시간 업데이트
-
-3. **terminal**: 터미널 인터페이스
+2. **terminal**: 터미널 인터페이스
    - xterm.js 통합
    - PTY 연결
    - 터미널 설정
 
-4. **instruction-editor**: 설정 에디터
+3. **instruction-editor**: 설정 에디터
    - AI 도구별 설정 파일 편집
    - 실시간 저장
    - Undo/Redo 기능
@@ -127,7 +122,7 @@ sequenceDiagram
     Terminal->>Service: onData(output)
     Service->>IPC: event.sender.send('terminal:data')
     IPC->>Store: onTerminalData(output)
-    Store->>UI: conversation update
+    Store->>UI: terminal update
 ```
 
 ### 상태 관리 플로우
@@ -136,7 +131,7 @@ sequenceDiagram
 graph LR
     subgraph "Zustand Stores"
         APP[App Store]
-        CONV[Conversation Store]
+        TERM[Terminal Store]
         UI[UI Store]
         RECENT[Recent Folders Store]
     end
@@ -150,7 +145,7 @@ graph LR
     end
     
     COMP --> APP
-    COMP --> CONV
+    COMP --> TERM
     COMP --> UI
     COMP --> RECENT
     
@@ -272,7 +267,7 @@ const useAppStore = create<AppState>()(
 ### 데이터 분리
 
 - **영구 저장**: 앱 설정, 최근 폴더, UI 설정
-- **세션 저장**: 현재 대화, 임시 상태
+- **세션 저장**: 현재 터미널 상태, 임시 상태
 - **제외**: 민감한 정보 (API 키 등)
 
 ## 확장성 설계

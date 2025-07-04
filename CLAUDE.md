@@ -51,7 +51,6 @@ src/
 ├── components/           # 공통 UI 컴포넌트
 ├── features/            # 독립적인 비즈니스 기능
 │   ├── chat-input/     # 채팅 입력 기능
-│   ├── conversation-panel/ # 대화 패널
 │   ├── instruction-editor/ # 설정 에디터
 │   └── terminal/       # 터미널 인터페이스
 ├── shared/             # 공유 리소스
@@ -87,11 +86,10 @@ src-electron/
 - **IME 지원**: 한국어, 일본어 등 복합 문자 입력
 - **키보드 단축키**: 효율적인 작업 흐름
 
-### 4. 실시간 대화 관리
-- 입력-출력 쌍 자동 추적
-- 대화 기록 확장/축소
-- 대화별 개별 삭제
-- 실시간 출력 캡처
+### 4. 실시간 터미널 관리
+- AI 도구와의 실시간 통신
+- 터미널 출력 캡처
+- 명령 실행 및 결과 처리
 
 ### 5. 프로젝트 관리
 - 최근 폴더 관리 및 북마크
@@ -129,7 +127,7 @@ const ChatDashboard: React.FC = () => {
 ```typescript
 // ✅ Good: 도메인별 스토어 분리
 const useAppStore = create<AppState>(...);
-const useConversationStore = create<ConversationState>(...);
+const useTerminalStore = create<TerminalState>(...);
 const useUIStore = create<UIState>(...);
 
 // ❌ Bad: 모든 상태를 하나의 스토어에
@@ -194,27 +192,27 @@ describe('ChatInput Component', () => {
 ### React 최적화
 ```typescript
 // ✅ Good: React.memo와 useMemo 적절한 사용
-const ConversationEntry = React.memo<ConversationEntryProps>(({ entry }) => {
-  const formattedContent = useMemo(() => {
-    return formatConversationContent(entry.content);
-  }, [entry.content]);
+const TerminalOutput = React.memo<TerminalOutputProps>(({ output }) => {
+  const formattedOutput = useMemo(() => {
+    return formatTerminalOutput(output);
+  }, [output]);
 
-  return <div>{formattedContent}</div>;
+  return <div>{formattedOutput}</div>;
 });
 ```
 
 ### 가상화 활용
 ```typescript
 // 대량 데이터 처리시 가상화 사용
-const ConversationList: React.FC<{ entries: ConversationEntry[] }> = ({ entries }) => {
+const TerminalLogList: React.FC<{ logs: TerminalLog[] }> = ({ logs }) => {
   return (
     <FixedSizeList
       height={600}
-      itemCount={entries.length}
-      itemSize={120}
-      itemData={entries}
+      itemCount={logs.length}
+      itemSize={24}
+      itemData={logs}
     >
-      {ConversationEntryRenderer}
+      {TerminalLogRenderer}
     </FixedSizeList>
   );
 };

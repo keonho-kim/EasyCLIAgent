@@ -29,11 +29,10 @@ EasyCLIAgent는 Gemini CLI와 Claude Code를 위한 직관적이고 현대적인
 - **IME 지원**: 한국어, 일본어 등 복합 문자 입력
 - **키보드 단축키**: 효율적인 작업 흐름
 
-### 📊 **실시간 대화 관리**
-- 입력-출력 쌍 자동 추적
-- 대화 기록 확장/축소
-- 대화별 개별 삭제
-- 실시간 출력 캡처
+### 📊 **실시간 터미널 관리**
+- AI 도구와의 실시간 통신
+- 터미널 출력 캡처
+- 명령 실행 및 결과 처리
 
 ### 📁 **프로젝트 관리**
 - 최근 폴더 관리 및 북마크
@@ -113,7 +112,7 @@ EasyCLIAgent는 **Feature-Sliced Design** 아키텍처를 따르며, **SOLID 원
 │   ├── features/          # 기능별 모듈
 │   │   ├── chat-input/    # 채팅 입력
 │   │   ├── terminal/      # 터미널 인터페이스
-│   │   └── conversation-panel/ # 대화 관리
+│   │   └── instruction-editor/ # 설정 에디터
 │   ├── shared/            # 공유 리소스
 │   └── stores/            # 상태 관리
 ├── src-electron/           # 백엔드 (Electron)
@@ -164,7 +163,7 @@ npm run typecheck
 - [x] 멀티 탭 워크스페이스
 - [x] AI 도구 연동 (Gemini CLI, Claude Code)
 - [x] 파일/명령어 자동완성
-- [x] 실시간 대화 관리
+- [x] 실시간 터미널 관리
 - [x] 다국어 지원
 - [x] 테마 시스템
 - [x] 프로젝트 북마크
@@ -178,7 +177,7 @@ npm run typecheck
 ### 계획된 기능 📋
 - [ ] 다른 AI 모델 지원
 - [ ] 커스텀 테마
-- [ ] 대화 내보내기
+- [ ] 출력 내보내기
 - [ ] 음성 입력
 
 ## 🤝 커뮤니티

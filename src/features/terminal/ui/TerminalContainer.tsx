@@ -12,15 +12,14 @@ import { useTerminalState } from '../lib/useTerminalState';
 import { TerminalHeader } from './TerminalHeader';
 import { TerminalEngine } from './TerminalEngine';
 import type { TerminalContainerProps } from '../model/types';
+import type { ElectronAPI } from '../../../shared/types/electronAPI';
 
 export const TerminalContainer: React.FC<TerminalContainerProps> = ({
   workspaceDir,
   aiTool = 'gemini',
   onFocus,
-  onTerminalData,
-  onHistoryToggle,
-  isHistoryOpen,
   onInstructionEdit,
+  onOpenFolder,
 }) => {
   const { uiState } = useAppStore();
   const { fontSize, theme } = uiState;
@@ -38,6 +37,24 @@ export const TerminalContainer: React.FC<TerminalContainerProps> = ({
       onInstructionEdit();
     }
   }, [onInstructionEdit]);
+
+  // Handle open folder
+  const handleOpenFolder = useCallback(async () => {
+    if (onOpenFolder) {
+      onOpenFolder();
+    } else {
+      // Default behavior: open the current workspace directory
+      try {
+        const electronAPI = window.electronAPI as ElectronAPI;
+        const result = await electronAPI.openFolder(workspaceDir);
+        if (!result.success) {
+          console.error('Failed to open folder:', result.error);
+        }
+      } catch (error) {
+        console.error('Error opening folder:', error);
+      }
+    }
+  }, [onOpenFolder, workspaceDir]);
 
   // Auto-resize on container size change
   useEffect(() => {
@@ -86,8 +103,7 @@ export const TerminalContainer: React.FC<TerminalContainerProps> = ({
       <TerminalHeader
         title={workspaceDir}
         onInstructionEdit={handleInstructionEdit}
-        onHistoryToggle={onHistoryToggle}
-        isHistoryOpen={isHistoryOpen}
+        onOpenFolder={handleOpenFolder}
         onFullscreenToggle={terminalState.toggleFullscreen}
         isFullscreen={terminalState.state.isFullscreen}
         theme={theme}
@@ -100,7 +116,6 @@ export const TerminalContainer: React.FC<TerminalContainerProps> = ({
         theme={theme}
         fontSize={fontSize}
         onFocus={onFocus}
-        onTerminalData={onTerminalData}
         isScrolling={terminalState.state.isScrolling}
         onScrollingChange={terminalState.setScrolling}
         onTerminalReady={handleTerminalReady}

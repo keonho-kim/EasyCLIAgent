@@ -54,26 +54,13 @@
     "send": "Send (Enter)",
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
-    "history": "Show chat history",
-    "hideHistory": "Hide chat history",
     "instructionEdit": "Edit Instructions",
+    "openFolder": "Open Folder",
     "connectionStatus": {
       "connected": "Connected",
       "disconnected": "Disconnected",
       "error": "Error"
     }
-  },
-  "chatHistory": {
-    "title": "Chat History",
-    "searchPlaceholder": "Search messages...",
-    "user": "User",
-    "assistant": "Assistant",
-    "system": "System",
-    "error": "Error",
-    "noMessages": "No messages yet",
-    "copy": "Copy",
-    "copyAll": "Copy All",
-    "delete": "Delete"
   },
   "instruction": {
     "title": "AI Instructions",
@@ -89,9 +76,7 @@
   },
   "commands": {
     "clear": "Clear screen",
-    "reset": "Reset conversation",
     "help": "Show help",
-    "history": "Toggle history panel",
     "fullscreen": "Toggle fullscreen",
     "theme": "Toggle theme",
     "lang": "Change language",
@@ -99,9 +84,7 @@
     "exit": "Exit application",
     "descriptions": {
       "clear": "Clear the terminal screen",
-      "reset": "Reset the current conversation",
       "help": "Display available commands",
-      "history": "Show/hide the conversation history panel",
       "fullscreen": "Enter/exit fullscreen mode",
       "theme": "Switch between light and dark theme",
       "lang": "Change the interface language",

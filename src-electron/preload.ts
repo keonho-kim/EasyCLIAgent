@@ -10,6 +10,7 @@ const electronAPI = {
   createDirectory: (parentPath: string, folderName: string) => 
     ipcRenderer.invoke('create-directory', parentPath, folderName),
   deleteDirectory: (dirPath: string) => ipcRenderer.invoke('delete-directory', dirPath),
+  openFolder: (folderPath: string) => ipcRenderer.invoke('open-folder', folderPath),
   
   // AI 도구 서비스 관련
   initializeAITool: (workspaceDir: string, aiTool: 'gemini' | 'claude') => ipcRenderer.invoke('initialize-ai-tool', workspaceDir, aiTool),

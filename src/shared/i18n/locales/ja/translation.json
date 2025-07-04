@@ -52,26 +52,13 @@
     "send": "送信 (Enter)",
     "fullscreen": "フルスクリーン",
     "exitFullscreen": "フルスクリーン終了",
-    "history": "チャット履歴を表示",
-    "hideHistory": "チャット履歴を非表示",
     "instructionEdit": "インストラクション編集",
+    "openFolder": "フォルダを開く",
     "connectionStatus": {
       "connected": "接続済み",
       "disconnected": "切断",
       "error": "エラー"
     }
-  },
-  "chatHistory": {
-    "title": "チャット履歴",
-    "searchPlaceholder": "メッセージを検索...",
-    "user": "ユーザー",
-    "assistant": "アシスタント",
-    "system": "システム",
-    "error": "エラー",
-    "noMessages": "まだメッセージがありません",
-    "copy": "コピー",
-    "copyAll": "すべてコピー",
-    "delete": "削除"
   },
   "instruction": {
     "title": "AIインストラクション",
@@ -87,9 +74,7 @@
   },
   "commands": {
     "clear": "画面をクリア",
-    "reset": "会話をリセット",
     "help": "ヘルプを表示",
-    "history": "履歴パネルを切り替え",
     "fullscreen": "フルスクリーンを切り替え",
     "theme": "テーマを切り替え",
     "lang": "言語を変更",
@@ -97,9 +82,7 @@
     "exit": "アプリケーションを終了",
     "descriptions": {
       "clear": "ターミナル画面をクリアします",
-      "reset": "現在の会話をリセットします",
       "help": "利用可能なコマンドを表示します",
-      "history": "会話履歴パネルを表示/非表示にします",
       "fullscreen": "フルスクリーンモードに切り替え/解除します",
       "theme": "ライト/ダークテーマを切り替えます",
       "lang": "インターフェース言語を変更します",

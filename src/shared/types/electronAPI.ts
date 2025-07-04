@@ -43,6 +43,10 @@ export interface ElectronAPI {
     success: boolean;
     error?: string;
   }>;
+  openFolder: (folderPath: string) => Promise<{
+    success: boolean;
+    error?: string;
+  }>;
   
   // AI tool services
   initializeAITool: (workspaceDir: string, aiTool: 'gemini' | 'claude') => Promise<AIToolInitResult>;

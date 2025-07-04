@@ -3,7 +3,7 @@
  * 디렉토리 관련 IPC 핸들러들 (SRP 준수)
  */
 
-import { ipcMain, dialog } from 'electron';
+import { ipcMain, dialog, shell } from 'electron';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -206,6 +206,43 @@ export function setupDirectoryHandlers() {
       return {
         success: false,
         error: error instanceof Error ? error.message : '디렉토리 선택 실패'
+      };
+    }
+  });
+
+  // 폴더를 시스템 파일 매니저에서 열기
+  ipcMain.handle('open-folder', async (_, folderPath: string): Promise<{
+    success: boolean;
+    error?: string;
+  }> => {
+    try {
+      // 폴더 경로 존재 확인
+      const stats = await fs.stat(folderPath);
+      if (!stats.isDirectory()) {
+        return {
+          success: false,
+          error: '지정된 경로가 디렉토리가 아닙니다.'
+        };
+      }
+
+      // 시스템 파일 매니저에서 폴더 열기
+      const result = await shell.openPath(folderPath);
+      
+      // shell.openPath는 성공시 빈 문자열을 반환하고, 실패시 에러 메시지를 반환
+      if (result === '') {
+        return {
+          success: true
+        };
+      } else {
+        return {
+          success: false,
+          error: result
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : '폴더 열기 실패'
       };
     }
   });

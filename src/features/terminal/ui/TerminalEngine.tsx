@@ -23,23 +23,20 @@ export const TerminalEngine: React.FC<TerminalEngineComponentProps> = ({
   theme,
   fontSize,
   onFocus,
-  onTerminalData,
   isScrolling,
   onScrollingChange,
   onTerminalReady,
 }) => {
   const terminalRef = useRef<HTMLDivElement>(null);
-  const onTerminalDataRef = useRef(onTerminalData);
   const onTerminalReadyRef = useRef(onTerminalReady);
   const onFocusRef = useRef(onFocus);
   const muiTheme = useTheme();
 
   // Update refs when props change
   useEffect(() => {
-    onTerminalDataRef.current = onTerminalData;
     onTerminalReadyRef.current = onTerminalReady;
     onFocusRef.current = onFocus;
-  }, [onTerminalData, onTerminalReady, onFocus]);
+  }, [onTerminalReady, onFocus]);
 
   // Modern scrollbar classes using custom CSS
   const scrollbarClasses = [
@@ -110,10 +107,6 @@ export const TerminalEngine: React.FC<TerminalEngineComponentProps> = ({
     // 터미널 데이터 리스너 설정
     const removeDataListener = window.electronAPI.onTerminalData((data: string) => {
       term.write(data);
-      // 대화 추적을 위해 터미널 출력 캡처
-      if (onTerminalDataRef.current) {
-        onTerminalDataRef.current(data);
-      }
     });
 
     // Set up terminal input handling

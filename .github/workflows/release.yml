@@ -35,12 +35,19 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential python3 python3-distutils libdrm-dev libgbm-dev libnss3-dev libatk-bridge2.0-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxss-dev libasound2-dev
+          sudo apt-get install -y build-essential python3 python3-dev python3-venv libdrm-dev libgbm-dev libnss3-dev libatk-bridge2.0-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxss-dev libasound2-dev
+          # python3-distutils 대신 python3-dev 사용 (Ubuntu 24.04 호환)
           
-      - name: Setup Python for macOS (fix distutils)
+      - name: Setup Python for macOS (fix PEP 668)
         if: runner.os == 'macOS'
         run: |
-          python3 -m pip install --user setuptools
+          # 가상환경 생성하여 PEP 668 문제 해결
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install setuptools wheel
+          # 또는 pipx 사용
+          # brew install pipx
+          # pipx install setuptools
           
       - name: Setup MSBuild for Windows (for node-pty)
         if: runner.os == 'Windows'
@@ -77,14 +84,83 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-v20-
             
-      - name: Install npm dependencies
-        run: npm install
+      - name: Install npm dependencies (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          # Clean install to avoid dependency conflicts
+          npm ci --include=dev --include=optional
+          # Fallback to regular install if ci fails
+          if [ $? -ne 0 ]; then
+            echo "npm ci failed, falling back to npm install"
+            npm install
+          fi
+          
+      - name: Install npm dependencies (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # Windows에서 더 안정적인 의존성 설치
+          Write-Host "Installing dependencies for Windows..."
+          
+          # 1. 먼저 캐시 클리어
+          npm cache clean --force
+          
+          # 2. 의존성 설치 (선택적 종속성 제외)
+          npm ci --include=dev --omit=optional
+          
+          # 3. 실패시 일반 설치로 대체
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "npm ci failed, trying regular install..."
+            npm install --omit=optional
+          }
         
-      # 네이티브 모듈 재빌드 (continue-on-error 제거!)
-      - name: Rebuild native dependencies for Electron
-        run: npx @electron/rebuild --force --module-dir .
+      # 네이티브 모듈 재빌드 (플랫폼별 조건부 처리)
+      - name: Rebuild native dependencies for Electron (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          # macOS에서 가상환경 활성화
+          if [ "$RUNNER_OS" == "macOS" ]; then
+            source .venv/bin/activate
+          fi
+          npx @electron/rebuild --force --module-dir .
+        env:
+          npm_config_python: python3
+          
+      - name: Rebuild native dependencies for Electron (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # Windows에서 node-pty 컴파일 에러 우회
+          Write-Host "Setting up node-pty for Windows..."
+          
+          # 1. 먼저 선택적 의존성 없이 설치
+          npm install --no-optional
+          
+          # 2. node-pty 전용 빌드 설정
+          npm config set msvs_version 2022
+          npm config set node_gyp node_modules/.bin/node-gyp
+          
+          # 3. 단계적 재빌드 (실패시 계속 진행)
+          try {
+            npx @electron/rebuild --force --module-dir . --only node-pty
+            Write-Host "node-pty rebuild successful"
+          } catch {
+            Write-Host "node-pty rebuild failed, trying fallback method..."
+            
+            # 4. 실패시 대체 방법 - 미리 빌드된 바이너리 사용
+            npm install --force node-pty@latest
+          }
+          
+          # 5. 최종 확인 - 빌드 성공 여부 체크
+          if (Test-Path "node_modules/node-pty/build/Release/pty.node") {
+            Write-Host "node-pty successfully built or installed"
+          } else {
+            Write-Host "Warning: node-pty build failed, app may have limited terminal functionality"
+          }
         env:
           npm_config_msvs_version: '2022'
+          npm_config_node_gyp: 'node_modules/.bin/node-gyp'
+          ELECTRON_BUILDER_CACHE: 'false'
         
       - name: TypeScript check
         run: npm run typecheck

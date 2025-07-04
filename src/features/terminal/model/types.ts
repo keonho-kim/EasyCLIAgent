@@ -5,18 +5,14 @@ export interface SimpleTerminalProps {
   workspaceDir: string;
   aiTool?: 'gemini' | 'claude';
   onFocus?: () => void;
-  onTerminalData?: (data: string) => void;
-  onHistoryToggle?: () => void;
-  isHistoryOpen?: boolean;
   onInstructionEdit?: () => void;
 }
 
 export interface TerminalHeaderProps {
-  onHistoryToggle?: () => void;
-  isHistoryOpen?: boolean;
   onFullscreenToggle: () => void;
   isFullscreen: boolean;
   onInstructionEdit?: () => void;
+  onOpenFolder?: () => void;
   theme: 'light' | 'dark';
   title: string;
 }
@@ -27,7 +23,6 @@ export interface TerminalEngineProps {
   theme: 'light' | 'dark';
   fontSize: number;
   onFocus?: () => void;
-  onTerminalData?: (data: string) => void;
   isScrolling: boolean;
   onScrollingChange: (scrolling: boolean) => void;
 }
@@ -36,10 +31,8 @@ export interface TerminalContainerProps {
   workspaceDir: string;
   aiTool?: 'gemini' | 'claude';
   onFocus?: () => void;
-  onTerminalData?: (data: string) => void;
-  onHistoryToggle?: () => void;
-  isHistoryOpen?: boolean;
   onInstructionEdit?: () => void;
+  onOpenFolder?: () => void;
 }
 
 export interface TerminalConfig {
