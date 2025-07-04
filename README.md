@@ -104,17 +104,6 @@ npm run dev
 이 프로젝트의 구조를 설명해주세요
 ```
 
-## 📖 스크린샷
-
-### 메인 인터페이스
-![메인 화면](./docs/images/main-interface.png)
-
-### AI 도구 선택
-![AI 도구 선택](./docs/images/ai-tool-selection.png)
-
-### 자동완성 기능
-![자동완성](./docs/images/autocomplete.png)
-
 ## 🏗 아키텍처
 
 EasyCLIAgent는 **Feature-Sliced Design** 아키텍처를 따르며, **SOLID 원칙**을 엄격히 준수합니다.

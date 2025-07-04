@@ -16,6 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     strategy:
+      fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
         
@@ -29,11 +30,21 @@ jobs:
           node-version: 18
           cache: npm
           
+      - name: Install system dependencies (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3-dev libatk-bridge2.0-dev libdrm2-dev libxcomposite-dev libxdamage-dev libxrandr-dev libgbm-dev libxss-dev libasound2-dev
+          
       - name: Install dependencies
         run: npm ci
         
       - name: Rebuild native dependencies
         run: npm run rebuild
+        continue-on-error: true
+        
+      - name: TypeScript check
+        run: npm run typecheck
         
       - name: Build Electron app
         run: npm run build
