@@ -7,6 +7,10 @@ import * as pty from 'node-pty';
 import * as os from 'os';
 import type { GeminiEvent } from '../types';
 
+// node-pty 모듈 로딩 확인
+console.log('node-pty module loaded:', pty);
+console.log('node-pty spawn function:', typeof pty.spawn);
+
 export class TerminalManager {
   private terminalProcess: pty.IPty | null = null;
   private isInitialized = false;
@@ -15,6 +19,8 @@ export class TerminalManager {
   // Initialize terminal with AI tool
   async initializeTerminal(workspaceDir: string, aiTool: 'gemini' | 'claude'): Promise<boolean> {
     try {
+      console.log('Initializing terminal with node-pty...');
+      
       if (this.terminalProcess) {
         this.terminalProcess.kill();
       }
@@ -22,6 +28,9 @@ export class TerminalManager {
       // Determine shell and command based on platform
       const shell = process.platform === 'win32' ? 'powershell.exe' : 
                    process.platform === 'darwin' ? '/bin/zsh' : '/bin/bash';
+      
+      console.log('Using shell:', shell);
+      console.log('Working directory:', workspaceDir);
       
       // Create PTY process
       this.terminalProcess = pty.spawn(shell, [], {
@@ -35,6 +44,8 @@ export class TerminalManager {
           COLORTERM: 'truecolor',
         }
       });
+      
+      console.log('PTY process created successfully');
 
       // Set up data handlers
       this.terminalProcess.onData((data: string) => {

@@ -5,6 +5,7 @@ export interface SimpleTerminalProps {
   workspaceDir: string;
   aiTool?: 'gemini' | 'claude';
   onFocus?: () => void;
+  onTerminalData?: (data: string) => void;
   onInstructionEdit?: () => void;
 }
 
@@ -23,6 +24,7 @@ export interface TerminalEngineProps {
   theme: 'light' | 'dark';
   fontSize: number;
   onFocus?: () => void;
+  onTerminalData?: (data: string) => void;
   isScrolling: boolean;
   onScrollingChange: (scrolling: boolean) => void;
 }
@@ -31,6 +33,7 @@ export interface TerminalContainerProps {
   workspaceDir: string;
   aiTool?: 'gemini' | 'claude';
   onFocus?: () => void;
+  onTerminalData?: (data: string) => void;
   onInstructionEdit?: () => void;
   onOpenFolder?: () => void;
 }

@@ -96,6 +96,12 @@ function App() {
     }
   };
 
+  // 터미널 출력 캡처 (대화 패널 없이 로깅용)
+  const handleTerminalData = (data: string) => {
+    // 간단한 로깅만 (나중에 필요시 확장 가능)
+    console.log('[Terminal Output]:', data);
+  };
+
   const handleOpenMarkdownEditor = () => setMarkdownEditorOpen(true);
   const handleCloseMarkdownEditor = () => setMarkdownEditorOpen(false);
 
@@ -133,6 +139,7 @@ function App() {
             workspaceDir={activeTab.workspace.path}
             aiTool={activeTab.aiTool || 'gemini'}
             onFocus={focusManager.setTerminalFocus}
+            onTerminalData={handleTerminalData}
             onInstructionEdit={handleOpenMarkdownEditor}
           />
         </Box>
