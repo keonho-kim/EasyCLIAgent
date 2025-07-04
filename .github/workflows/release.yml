@@ -35,7 +35,12 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential python3 libdrm-dev libgbm-dev libnss3-dev libatk-bridge2.0-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxss-dev libasound2-dev
+          sudo apt-get install -y build-essential python3 python3-distutils libdrm-dev libgbm-dev libnss3-dev libatk-bridge2.0-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxss-dev libasound2-dev
+          
+      - name: Setup Python for macOS (fix distutils)
+        if: runner.os == 'macOS'
+        run: |
+          python3 -m pip install --user setuptools
           
       - name: Setup MSBuild for Windows (for node-pty)
         if: runner.os == 'Windows'
@@ -43,15 +48,31 @@ jobs:
         with:
           vs-version: 'latest'
           
-      # npm 캐싱
-      - name: Get npm cache directory path
-        id: npm-cache-dir
+      # npm 캐싱 (플랫폼별 조건부)
+      - name: Get npm cache directory path (Unix)
+        if: runner.os != 'Windows'
+        id: npm-cache-dir-unix
         run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
         
-      - name: Cache node_modules
+      - name: Get npm cache directory path (Windows)
+        if: runner.os == 'Windows'
+        id: npm-cache-dir-windows
+        run: echo "dir=$(npm config get cache)" >> $env:GITHUB_OUTPUT
+        
+      - name: Cache node_modules (Unix)
+        if: runner.os != 'Windows'
         uses: actions/cache@v4
         with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          path: ${{ steps.npm-cache-dir-unix.outputs.dir }}
+          key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-v20-
+            
+      - name: Cache node_modules (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.npm-cache-dir-windows.outputs.dir }}
           key: ${{ runner.os }}-node-v20-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-v20-
