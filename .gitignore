@@ -65,9 +65,10 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Electron build output
+dist/
 dist-renderer/
 dist-electron/
-build/
+build/icon.iconset/
 out/
 
 # Electron app binaries
