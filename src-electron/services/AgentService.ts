@@ -14,7 +14,6 @@ export class AgentService {
   private workspaceDir = '';
 
   constructor() {
-    console.log('AgentService 생성됨');
     this.cliChecker = new CliChecker();
     this.terminalManager = new TerminalManager();
   }

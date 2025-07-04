@@ -20,6 +20,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "rebuild": "electron-rebuild",
+    "postinstall": "electron-builder install-app-deps",
     "prepare": "husky",
     "publish": "electron-builder --publish=always",
     "draft": "electron-builder --publish=never"
