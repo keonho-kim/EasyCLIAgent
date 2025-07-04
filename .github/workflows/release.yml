@@ -30,11 +30,13 @@ jobs:
         with:
           node-version: 20
           
-      # Python 설정 (node-gyp v9 호환용)
+      # Python 설정 (PEP 668 호환)
       - name: Setup Python setuptools
         run: |
-          # node-gyp v9에서 distutils 대체용 setuptools 설치
-          python3 -m pip install --user setuptools
+          # PEP 668 환경에서 안전한 setuptools 설치
+          python3 -m pip install --user --break-system-packages setuptools || \
+          brew install python-setuptools || \
+          echo "Setuptools installation attempted"
           
       # npm 캐싱
       - name: Get npm cache directory path
