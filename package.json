@@ -20,7 +20,6 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "prepare": "husky",
-    "rebuild": "electron-rebuild -f -w node-pty",
     "publish": "electron-builder --publish=always",
     "draft": "electron-builder --publish=never"
   },
@@ -114,7 +113,6 @@
     "concurrently": "^9.1.0",
     "electron": "^33.2.1",
     "electron-builder": "^25.1.8",
-    "electron-rebuild": "^3.2.9",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
