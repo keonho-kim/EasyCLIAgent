@@ -1,0 +1,125 @@
+/* Modern Auto-Hide Scrollbar Styles */
+
+/* Base scrollbar styles */
+.modern-scrollbar {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.2s ease-in-out;
+}
+
+/* Show scrollbar on hover */
+.modern-scrollbar:hover {
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+}
+
+/* Dark theme scrollbar */
+.modern-scrollbar.dark {
+  scrollbar-color: transparent transparent;
+}
+
+.modern-scrollbar.dark:hover {
+  scrollbar-color: rgba(209, 213, 219, 0.4) transparent;
+}
+
+/* Webkit scrollbar (Chrome, Safari, Edge) */
+.modern-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Show webkit scrollbar on hover */
+.modern-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+.modern-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
+
+/* Dark theme webkit scrollbar */
+.modern-scrollbar.dark:hover::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.4);
+}
+
+.modern-scrollbar.dark:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(209, 213, 219, 0.6);
+}
+
+/* Show scrollbar when actively scrolling */
+.modern-scrollbar.scrolling {
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+}
+
+.modern-scrollbar.scrolling.dark {
+  scrollbar-color: rgba(209, 213, 219, 0.4) transparent;
+}
+
+.modern-scrollbar.scrolling::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+.modern-scrollbar.scrolling.dark::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.4);
+}
+
+/* Terminal specific scrollbar styling */
+.terminal-scrollbar {
+  overflow: auto;
+}
+
+.terminal-scrollbar .xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.2s ease-in-out;
+}
+
+.terminal-scrollbar:hover .xterm-viewport {
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+}
+
+.terminal-scrollbar.dark:hover .xterm-viewport {
+  scrollbar-color: rgba(209, 213, 219, 0.4) transparent;
+}
+
+.terminal-scrollbar .xterm-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-scrollbar .xterm-viewport::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.terminal-scrollbar .xterm-viewport::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+}
+
+.terminal-scrollbar:hover .xterm-viewport::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+}
+
+.terminal-scrollbar:hover .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
+
+.terminal-scrollbar.dark:hover .xterm-viewport::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.4);
+}
+
+.terminal-scrollbar.dark:hover .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(209, 213, 219, 0.6);
+}

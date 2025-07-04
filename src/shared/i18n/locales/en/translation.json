@@ -1,0 +1,140 @@
+{
+  "common": {
+    "send": "Send",
+    "stop": "Stop",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "close": "Close",
+    "settings": "Settings",
+    "language": "Language",
+    "daysAgo": "{{count}} day ago",
+    "daysAgo_plural": "{{count}} days ago",
+    "hoursAgo": "{{count}} hour ago",
+    "hoursAgo_plural": "{{count}} hours ago",
+    "justNow": "Just now"
+  },
+  "header": {
+    "selectDirectory": "Select Directory",
+    "toggleTheme": "Toggle theme",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
+  "directoryBrowser": {
+    "homeDirectory": "Home Directory",
+    "createFolder": "Create New Folder",
+    "folderName": "Folder Name",
+    "folderNameRequired": "Please enter a folder name",
+    "createFolderSuccess": "Folder created successfully",
+    "createFolderError": "Failed to create folder",
+    "deleteFolder": "Delete Folder",
+    "deleteFolderConfirm": "Are you sure you want to delete this folder?",
+    "deleteFolderSuccess": "Folder deleted successfully",
+    "deleteFolderError": "Failed to delete folder",
+    "emptyFolder": "This folder is empty",
+    "selectNewFolder": "Select New Folder",
+    "bookmarked": "Bookmarked",
+    "recent": "Recent",
+    "noBookmarkedFolders": "No bookmarked folders",
+    "noRecentFolders": "No recent folders",
+    "description": "Description",
+    "projectDescription": "Project Description",
+    "editDescription": "Edit Description",
+    "removeFromRecent": "Remove from recent",
+    "addToBookmark": "Add to bookmark",
+    "removeFromBookmark": "Remove from bookmark"
+  },
+  "terminal": {
+    "title": "Terminal",
+    "placeholder": "Send a message to AI... (@ for files/folders, / for commands)",
+    "interrupt": "Interrupt command (ESC)",
+    "send": "Send (Enter)",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "history": "Show chat history",
+    "hideHistory": "Hide chat history",
+    "instructionEdit": "Edit Instructions",
+    "connectionStatus": {
+      "connected": "Connected",
+      "disconnected": "Disconnected",
+      "error": "Error"
+    }
+  },
+  "chatHistory": {
+    "title": "Chat History",
+    "searchPlaceholder": "Search messages...",
+    "user": "User",
+    "assistant": "Assistant",
+    "system": "System",
+    "error": "Error",
+    "noMessages": "No messages yet",
+    "copy": "Copy",
+    "copyAll": "Copy All",
+    "delete": "Delete"
+  },
+  "instruction": {
+    "title": "AI Instructions",
+    "editor": "Instruction Editor",
+    "selectAI": "Select AI Tool",
+    "modified": "Modified",
+    "saved": "Saved",
+    "saving": "Saving...",
+    "loadError": "Failed to load instruction file",
+    "saveError": "Failed to save instruction file",
+    "saveSuccess": "Instructions saved successfully",
+    "unsavedChanges": "You have unsaved changes"
+  },
+  "commands": {
+    "clear": "Clear screen",
+    "reset": "Reset conversation",
+    "help": "Show help",
+    "history": "Toggle history panel",
+    "fullscreen": "Toggle fullscreen",
+    "theme": "Toggle theme",
+    "lang": "Change language",
+    "instruction": "Edit instructions",
+    "exit": "Exit application",
+    "descriptions": {
+      "clear": "Clear the terminal screen",
+      "reset": "Reset the current conversation",
+      "help": "Display available commands",
+      "history": "Show/hide the conversation history panel",
+      "fullscreen": "Enter/exit fullscreen mode",
+      "theme": "Switch between light and dark theme",
+      "lang": "Change the interface language",
+      "instruction": "Edit AI instructions (GEMINI.md or CLAUDE.md)",
+      "exit": "Close the application"
+    }
+  },
+  "errors": {
+    "directorySelect": "Failed to select directory",
+    "aiInit": "Failed to initialize AI tool",
+    "messageSend": "Failed to send message",
+    "fileRead": "Failed to read file",
+    "fileWrite": "Failed to write file",
+    "unknown": "An unknown error occurred"
+  },
+  "aiSelector": {
+    "title": "Select AI Tool",
+    "subtitle": "Choose which AI assistant to use for this project",
+    "geminiDescription": "Google's AI assistant with powerful code understanding",
+    "claudeDescription": "Anthropic's AI assistant with exceptional reasoning abilities",
+    "recommended": "Previously Used"
+  },
+  "directory": {
+    "welcome": "Welcome to EasyCLIAgent",
+    "startMessage": "To get started, please select a project folder or choose from a recent one.",
+    "browseButton": "Browse Folder",
+    "recentFolders": "Recent Folders",
+    "noRecentFolders": "No recently opened folders.",
+    "browseToStart": "Browse for a folder or open an existing one to get started.",
+    "bookmarkedFolders": "Bookmarked Folders",
+    "noBookmarkedFolders": "No bookmarked folders."
+  },
+  "tabs": {
+    "addNewTab": "Add New Tab"
+  }
+}

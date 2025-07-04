@@ -1,0 +1,229 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 커스텀 스크롤바 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #555 #2d2d2d;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* 터미널 스타일 */
+.terminal-container {
+  height: 100%;
+  background-color: #1e1e1e;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.terminal-container .xterm-viewport {
+  background-color: transparent !important;
+}
+
+.terminal-container .xterm-screen {
+  background-color: transparent !important;
+}
+
+/* 코드 블록 스타일 */
+.code-block {
+  font-family: 'Fira Code', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 12px;
+  overflow-x: auto;
+  white-space: pre;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* 메시지 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 스트리밍 텍스트 애니메이션 */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end);
+}
+
+/* 로딩 스피너 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* 파일 트리 스타일 */
+.file-tree {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875rem;
+}
+
+.file-tree-item {
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.file-tree-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.file-tree-item.selected {
+  background-color: rgba(66, 133, 244, 0.3);
+}
+
+/* 로그 엔트리 스타일 */
+.log-entry {
+  padding: 4px 8px;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
+  font-size: 0.875rem;
+}
+
+.log-entry.info {
+  border-left-color: #4285f4;
+  background-color: rgba(66, 133, 244, 0.1);
+}
+
+.log-entry.warn {
+  border-left-color: #fbbc04;
+  background-color: rgba(251, 188, 4, 0.1);
+}
+
+.log-entry.error {
+  border-left-color: #ea4335;
+  background-color: rgba(234, 67, 53, 0.1);
+}
+
+.log-entry.debug {
+  border-left-color: #9aa0a6;
+  background-color: rgba(154, 160, 166, 0.1);
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+  font-size: 0.75rem;
+  background-color: #2d2d2d;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 6px 8px;
+  max-width: 250px;
+}
+
+/* 드래그 앤 드롭 */
+.drop-zone {
+  border: 2px dashed #555;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+  border-color: #4285f4;
+  background-color: rgba(66, 133, 244, 0.1);
+}
+
+/* 반응형 레이아웃 */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-full-width {
+    width: 100% !important;
+  }
+}
+
+/* 접근성 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 포커스 표시 */
+.focus-visible {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
+
+/* 선택 텍스트 스타일 */
+::selection {
+  background-color: rgba(66, 133, 244, 0.3);
+}
+
+::-moz-selection {
+  background-color: rgba(66, 133, 244, 0.3);
+}

@@ -1,0 +1,136 @@
+{
+  "name": "easycliagent",
+  "productName": "EasyCLIAgent",
+  "version": "0.1.0",
+  "description": "Easy GUI agent for AI CLI tools (Gemini & Claude) with Electron, React, and Material-UI",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "dev:renderer": "vite",
+    "dev:main": "tsc -p electron && electron dist-electron/main.js",
+    "build": "tsc && vite build && electron-builder",
+    "build:dir": "tsc && vite build && electron-builder --dir",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p electron",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "prepare": "husky",
+    "rebuild": "electron-rebuild -f -w node-pty",
+    "publish": "electron-builder --publish=always",
+    "draft": "electron-builder --publish=never"
+  },
+  "gypSettings": {
+    "targets": [
+      {
+        "target_name": "node-pty",
+        "cflags!": [
+          "-fno-exceptions"
+        ],
+        "cflags_cc!": [
+          "-fno-exceptions"
+        ],
+        "xcode_settings": {
+          "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
+          "CLANG_CXX_LANGUAGE_STANDARD": "c++20",
+          "MACOSX_DEPLOYMENT_TARGET": "10.15"
+        },
+        "msvs_settings": {
+          "VCCLCompilerTool": {
+            "ExceptionHandling": 1
+          }
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "cli2gui",
+    "gemini",
+    "claude",
+    "cli",
+    "gui",
+    "electron",
+    "react",
+    "typescript"
+  ],
+  "author": "CLI2GUI Team",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.9",
+    "@mui/material": "^6.1.9",
+    "@tanstack/react-query": "^5.62.8",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/dompurify": "^3.0.5",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/xterm": "^5.5.0",
+    "chokidar": "^4.0.1",
+    "dompurify": "^3.2.6",
+    "framer-motion": "^11.18.0",
+    "husky": "^9.1.7",
+    "i18next": "^25.3.0",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "immer": "^10.1.1",
+    "lint-staged": "^16.1.2",
+    "lru-cache": "^11.1.0",
+    "marked": "^16.0.0",
+    "node-pty": "^1.0.0",
+    "path-browserify": "^1.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.6.0",
+    "react-window": "^1.8.10",
+    "swr": "^2.3.4",
+    "workbox-webpack-plugin": "^7.3.0",
+    "zustand": "^5.0.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^22.10.5",
+    "@types/path-browserify": "^1.0.3",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@types/react-window": "^1.8.8",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-rebuild": "^3.2.9",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "globals": "^16.0.0",
+    "jsdom": "^26.0.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.4.2",
+    "tailwind-scrollbar": "^4.0.2",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^7.0.2",
+    "vite-plugin-electron": "^0.28.8",
+    "vitest": "^3.2.4"
+  }
+}
