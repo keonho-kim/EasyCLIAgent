@@ -9,6 +9,7 @@ EasyCLIAgent는 Gemini CLI와 Claude Code를 위한 현대적인 GUI 애플리�
 이 프로젝트는 다음 핵심 원칙들을 엄격히 준수합니다:
 
 ### SOLID 원칙
+
 - **SRP (Single Responsibility Principle)**: 각 클래스/컴포넌트는 단 하나의 책임만 가집니다
 - **OCP (Open/Closed Principle)**: 확장에는 열려있고 수정에는 닫혀있습니다
 - **LSP (Liskov Substitution Principle)**: 하위 타입은 상위 타입을 완전히 대체할 수 있습니다
@@ -16,6 +17,7 @@ EasyCLIAgent는 Gemini CLI와 Claude Code를 위한 현대적인 GUI 애플리�
 - **DIP (Dependency Inversion Principle)**: 추상화에 의존하며 구체화에 의존하지 않습니다
 
 ### 코딩 표준
+
 - **KISS**: 단순함을 유지하며 불필요한 복잡성을 피합니다
 - **YAGNI**: 현재 필요하지 않은 기능은 구현하지 않습니다
 - **DRY**: 코드 중복을 최소화합니다
@@ -24,23 +26,27 @@ EasyCLIAgent는 Gemini CLI와 Claude Code를 위한 현대적인 GUI 애플리�
 ## 기술 스택
 
 ### Core Framework & Runtime
+
 - **Electron**: 크로스 플랫폼 데스크톱 애플리케이션
 - **TypeScript**: 타입 안전성과 개발자 경험 향상
 - **React 18**: 최신 React features (Concurrent features, Suspense)
 - **Vite**: 빠른 개발 서버와 번들링
 
 ### UI/UX Libraries
+
 - **Material-UI (MUI) v5**: Google Material Design 기반 컴포넌트
 - **TailwindCSS**: 유틸리티 우선 CSS 프레임워크
 - **Framer Motion**: 애니메이션과 전환 효과
 - **xterm.js**: 브라우저 기반 터미널 에뮬레이터
 
 ### State Management & Data
+
 - **Zustand**: 경량 클라이언트 상태 관리
 - **Zustand Persist**: 상태 영구 저장
 - **React i18next**: 다국어 지원
 
 ### Terminal & AI Integration
+
 - **node-pty**: PTY (Pseudo Terminal) 지원
 - **Chokidar**: 파일 시스템 감시
 
@@ -70,34 +76,40 @@ src-electron/
 ## 주요 기능
 
 ### 1. 멀티 워크스페이스
+
 - 탭 기반으로 여러 프로젝트 동시 작업
 - 독립적인 AI 도구 세션 관리
 - 워크스페이스별 설정 분리
 
 ### 2. AI 도구 연동
+
 - **Gemini CLI**: Google의 AI 어시스턴트 (gemini-cli)
 - **Claude Code**: Anthropic의 AI 어시스턴트 (claude-code)
 - 자동 설치 및 버전 관리
 - 통합된 터미널 인터페이스
 
 ### 3. 스마트 입력 시스템
+
 - **자동완성**: `@` 파일/폴더, `/` 명령어
 - **입력 히스토리**: 방향키로 이전 입력 탐색
 - **IME 지원**: 한국어, 일본어 등 복합 문자 입력
 - **키보드 단축키**: 효율적인 작업 흐름
 
 ### 4. 실시간 터미널 관리
+
 - AI 도구와의 실시간 통신
 - 터미널 출력 캡처
 - 명령 실행 및 결과 처리
 
 ### 5. 프로젝트 관리
+
 - 최근 폴더 관리 및 북마크
 - 프로젝트 설명 편집
 - 액세스 카운트 추적
 - AI 도구 추천 (이전 사용 기록 기반)
 
 ### 6. 설정 및 커스터마이징
+
 - 다크/라이트 테마 전환
 - 터미널 폰트 크기 조정
 - 다국어 지원 (한국어, 영어, 일본어)
@@ -106,6 +118,7 @@ src-electron/
 ## 개발 가이드라인
 
 ### 컴포넌트 설계 원칙
+
 ```typescript
 // ✅ Good: 단일 책임 원칙
 const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
@@ -124,6 +137,7 @@ const ChatDashboard: React.FC = () => {
 ```
 
 ### 상태 관리 패턴
+
 ```typescript
 // ✅ Good: 도메인별 스토어 분리
 const useAppStore = create<AppState>(...);
@@ -135,6 +149,7 @@ const useGlobalStore = create<AllState>(...);
 ```
 
 ### IPC 통신 패턴
+
 ```typescript
 // ✅ Good: 타입 안전한 IPC
 interface ElectronAPI {
@@ -149,6 +164,7 @@ setupFileSystemHandlers();
 ```
 
 ### 에러 처리 패턴
+
 ```typescript
 // ✅ Good: 체계적인 에러 처리
 export class AgentServiceError extends Error {
@@ -166,6 +182,7 @@ export class AgentServiceError extends Error {
 ## 테스트 전략
 
 ### 테스트 구조
+
 ```typescript
 // Given-When-Then 패턴 사용
 describe('ChatInput Component', () => {
@@ -190,6 +207,7 @@ describe('ChatInput Component', () => {
 ## 성능 최적화
 
 ### React 최적화
+
 ```typescript
 // ✅ Good: React.memo와 useMemo 적절한 사용
 const TerminalOutput = React.memo<TerminalOutputProps>(({ output }) => {
@@ -202,6 +220,7 @@ const TerminalOutput = React.memo<TerminalOutputProps>(({ output }) => {
 ```
 
 ### 가상화 활용
+
 ```typescript
 // 대량 데이터 처리시 가상화 사용
 const TerminalLogList: React.FC<{ logs: TerminalLog[] }> = ({ logs }) => {
@@ -221,12 +240,14 @@ const TerminalLogList: React.FC<{ logs: TerminalLog[] }> = ({ logs }) => {
 ## 보안 고려사항
 
 ### Electron 보안
+
 - **Context Isolation**: 렌더러와 메인 프로세스 분리
 - **Preload Script**: 안전한 API 노출
 - **CSP (Content Security Policy)**: XSS 방지
 - **Node Integration**: 비활성화
 
 ### 데이터 보안
+
 - 사용자 입력 검증
 - 파일 경로 검증
 - 프로세스 권한 최소화
@@ -264,6 +285,22 @@ npm run build:dir  # 폴더로 빌드
 npm run dist       # 설치 파일 생성
 ```
 
+## 결정 기록(ADR)
+
+- 목적: 주요 설계 결정을 기록하고 대안/근거/영향/마이그레이션/테스트를 투명하게 남깁니다.
+- 위치: `docs/decisions/`
+  - 가이드: `docs/decisions/README.md`
+  - 템플릿: `docs/decisions/adr-template.md`
+- 파일명 규칙: `NNNN-kebab-title.md` (예: `0001-ipc-channel-naming.md`)
+- 언제 작성하나
+  - IPC 계약(채널/Result 타입/이벤트) 변경
+  - Preload/Electron 보안(Context Isolation/CSP/API 표면) 변경
+  - Zustand 스토어/퍼시스트 구조·마이그레이션 변경
+  - i18n 키/네임스페이스 정책 변경
+  - 빌드/배포 체인(Electron/Vite/electron-builder) 변경
+  - 터미널/CLI 통합(node-pty/xterm, Gemini/Claude 초기화) 변경
+  - UI/테마(MUI 토큰, Tailwind 한도, 접근성) 정책 변경
+
 ## 기여 가이드라인
 
 1. **코딩 표준 준수**: ESLint, Prettier 설정 따르기
@@ -275,11 +312,13 @@ npm run dist       # 설치 파일 생성
 ## 문제 해결
 
 ### 일반적인 문제
+
 1. **캐시 문제**: `rm -rf node_modules/.vite && npm run dev`
 2. **타입 에러**: TypeScript 버전 확인 및 타입 정의 업데이트
 3. **빌드 실패**: 플랫폼별 종속성 확인
 
 ### 디버깅
+
 - 개발자 도구: `Ctrl+Shift+I` (개발 모드)
 - 로그 확인: 콘솔 및 터미널 출력
 - IPC 통신 디버깅: 메인/렌더러 프로세스 간 통신 추적

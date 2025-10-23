@@ -43,6 +43,7 @@ graph TB
 ### 프로세스 분리
 
 #### Main Process (src-electron/)
+
 - **역할**: 시스템 리소스 접근, 창 관리, 보안 제어
 - **주요 컴포넌트**:
   - Window Manager: 창 생성 및 관리
@@ -50,6 +51,7 @@ graph TB
   - Services: 비즈니스 로직
 
 #### Renderer Process (src/)
+
 - **역할**: UI 렌더링, 사용자 상호작용
 - **주요 컴포넌트**:
   - React Components: UI 컴포넌트

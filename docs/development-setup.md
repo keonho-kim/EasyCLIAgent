@@ -5,11 +5,13 @@ EasyCLIAgent 개발을 위한 환경 설정 가이드입니다.
 ## 사전 요구사항
 
 ### 필수 도구
+
 - **Node.js**: 18.0.0 이상
 - **npm**: 8.0.0 이상 또는 **yarn**: 1.22.0 이상
 - **Git**: 버전 관리
 
 ### 권장 개발 도구
+
 - **VS Code**: 주요 IDE
 - **Chrome/Edge**: 디버깅용 브라우저
 
@@ -40,6 +42,7 @@ vim .env
 ```
 
 주요 환경 변수:
+
 ```env
 NODE_ENV=development
 VITE_DEV_SERVER_URL=http://localhost:5173
@@ -63,6 +66,7 @@ npm run dev:main     # Electron 메인 프로세스
 ### VS Code 설정
 
 #### 필수 확장
+
 ```json
 {
   "recommendations": [
@@ -77,6 +81,7 @@ npm run dev:main     # Electron 메인 프로세스
 ```
 
 #### 작업 공간 설정 (.vscode/settings.json)
+
 ```json
 {
   "typescript.preferences.importModuleSpecifier": "relative",
@@ -95,6 +100,7 @@ npm run dev:main     # Electron 메인 프로세스
 ```
 
 #### 디버그 설정 (.vscode/launch.json)
+
 ```json
 {
   "version": "0.2.0",
@@ -177,6 +183,7 @@ npm run test:e2e
    - 브레이크포인트 설정 가능
 
 2. **로그 디버깅**:
+
    ```typescript
    console.log('[Main]', 'Debug message');
    ```
@@ -184,6 +191,7 @@ npm run test:e2e
 ### 렌더러 프로세스 디버깅
 
 1. **Chrome DevTools**:
+
    ```bash
    # 개발 모드에서
    Ctrl+Shift+I (Windows/Linux)
@@ -355,6 +363,7 @@ npx vite-bundle-analyzer dist-renderer
 ### 일반적인 문제
 
 1. **포트 충돌**:
+
    ```bash
    # 포트 확인
    lsof -i :5173
@@ -364,6 +373,7 @@ npx vite-bundle-analyzer dist-renderer
    ```
 
 2. **의존성 충돌**:
+
    ```bash
    # 캐시 삭제
    npm cache clean --force
@@ -372,6 +382,7 @@ npx vite-bundle-analyzer dist-renderer
    ```
 
 3. **TypeScript 에러**:
+
    ```bash
    # 타입 체크
    npx tsc --noEmit
